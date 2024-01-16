@@ -1,0 +1,112 @@
+/* Colors */
+$gunmetal: #2d3142ff;
+$paynes-gray: #4f5d75ff;
+$silver: #bfc0c0ff;
+$white: #ffffffff;
+$coral: #ef8354ff;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 20px;
+  padding: 0;
+  background-color: $paynes-gray;
+  color: $white;
+}
+
+.logo {
+  background-color: $gunmetal;
+  color: $coral;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px $paynes-gray;
+  text-align: center;
+  margin: 0.5em;
+}
+
+.board-row {
+  display: flex;
+
+  &:after {
+    clear: both;
+    content: "";
+    display: table;
+  }
+
+  .square {
+    flex-grow: 1;
+    height: auto;
+    background: $gunmetal;
+    border: 1px solid $paynes-gray;
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 34px;
+    padding: 0;
+    text-align: center;
+    aspect-ratio: 1/1;
+    min-height: 34px;
+  }
+}
+
+.status {
+  margin-bottom: 10px;
+}
+.game {
+  display: flex;
+  flex-direction: row;
+
+  div {
+    flex-grow: 1;
+  }
+}
+
+.game-info {
+  margin-left: 20px;
+}
+
+.game-board {
+  &.finished {
+    filter: blur(0.2em);
+    
+    button{
+      cursor: not-allowed;
+    }
+  }
+}
+
+.game-score {
+  padding: 0.2em;
+  text-align: center;
+  margin-bottom: 2em;
+  border: 0.1em solid $silver;
+  border-radius: 0.5em;
+}
+
+button {
+  margin: 0.2em;
+  padding: 1em;
+  background-color: $paynes-gray;
+  border-width: 0.3em;
+  border-color: $silver;
+  border-radius: 0.8em;
+  color: $white;
+
+  &:hover {
+    cursor: pointer;
+    border-color: $coral;
+  }
+
+  &.square {
+    border-radius: 0.1em;
+  }
+
+  &.restart{
+    background-color: $gunmetal;
+  }
+}
