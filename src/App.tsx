@@ -15,9 +15,16 @@ export default function GameOverview(): ReactElement {
     return (
         <>
             <div className='logo'>Tic Tac Tactics</div>
+            <div className='game-mode'>
+                <h2>Choose game mode</h2>
+                <select>
+                    <option value={1}>Simple</option>
+                    <option value={2}>Advanced</option>
+                </select>
+            </div>
             <div className="game-score">
-                <h2>Current score:</h2>
-                <h3>X: {score[0]} - O: {score[1]}</h3>
+                <h3>Current score:</h3>
+                <h4>X: {score[0]} - O: {score[1]}</h4>
                 <h5>{lastWinner && `Last winner was ${lastWinner}`}</h5>
             </div>
             <CurrentGame onScoreChange={handleScoreChange} />

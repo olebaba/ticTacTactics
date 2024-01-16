@@ -4,6 +4,7 @@ $paynes-gray: #4f5d75ff;
 $silver: #bfc0c0ff;
 $white: #ffffffff;
 $coral: #ef8354ff;
+$pink-shadow: #754f62;
 
 * {
   box-sizing: border-box;
@@ -20,13 +21,13 @@ body {
 .logo {
   background-color: $gunmetal;
   color: $coral;
-  font-size: 24px;
+  font-size: 4vw;
   font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 5px;
-  box-shadow: 2px 2px $paynes-gray;
+  padding: 2vw;
+  border-radius: 1rem;
+  box-shadow: 0rem 0rem 3rem 1rem $pink-shadow;
   text-align: center;
-  margin: 0.5em;
+  margin: 1em;
 }
 
 .board-row {
