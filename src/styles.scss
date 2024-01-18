@@ -8,6 +8,7 @@ $pink-shadow: #754f62;
 
 * {
   box-sizing: border-box;
+  transition: all 0.3s;
 }
 
 body {
@@ -109,7 +110,6 @@ body {
     background-color: $item-background-gunmetal;
     border: $border-silver solid;
     border-radius: 1vw;
-    transition: all 0.3s;
     cursor: pointer;
     color: $text-white;
 
@@ -122,7 +122,6 @@ body {
     }
   }
 }
-
 
 @media screen and (max-width: 768px) {
   .game {
