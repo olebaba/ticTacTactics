@@ -88,14 +88,14 @@ export function CurrentGame({ onScoreChange }: CurrentGameProps): ReactElement {
 
     return (
         <div className="game">
-            <div className="game-info">
-                <ol>{moves}</ol>
-            </div>
-            <div>
+             <div>
                 <div className="status">{status}</div>
                 <div className={`game-board ${winner ? 'finished' : ''}`}>
                     <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} onWin={handleWin} />
                 </div>
+            </div>
+            <div className="game-info">
+                <ol>{moves}</ol>
             </div>
         </div>
     );

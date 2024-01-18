@@ -1,9 +1,9 @@
 /* Colors */
-$gunmetal: #2d3142ff;
-$paynes-gray: #4f5d75ff;
-$silver: #bfc0c0ff;
-$white: #ffffffff;
-$coral: #ef8354ff;
+$item-background-gunmetal: #2d3142ff;
+$background-gray: #4f5d75ff;
+$border-silver: #bfc0c0ff;
+$text-white: #ffffffff;
+$logo-coral: #ef8354ff;
 $pink-shadow: #754f62;
 
 * {
@@ -14,13 +14,13 @@ body {
   font-family: sans-serif;
   margin: 20px;
   padding: 0;
-  background-color: $paynes-gray;
-  color: $white;
+  background-color: $background-gray;
+  color: $text-white;
 }
 
 .logo {
-  background-color: $gunmetal;
-  color: $coral;
+  background-color: $item-background-gunmetal;
+  color: $logo-coral;
   font-size: 4vw;
   font-weight: bold;
   padding: 2vw;
@@ -30,34 +30,6 @@ body {
   margin: 1em;
 }
 
-.board-row {
-  display: flex;
-
-  &:after {
-    clear: both;
-    content: "";
-    display: table;
-  }
-
-  .square {
-    flex-grow: 1;
-    height: auto;
-    background: $gunmetal;
-    border: 1px solid $paynes-gray;
-    float: left;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 34px;
-    padding: 0;
-    text-align: center;
-    aspect-ratio: 1/1;
-    min-height: 34px;
-  }
-}
-
-.status {
-  margin-bottom: 10px;
-}
 .game {
   display: flex;
   flex-direction: row;
@@ -65,49 +37,105 @@ body {
   div {
     flex-grow: 1;
   }
-}
 
-.game-info {
-  margin-left: 20px;
-}
+  .status {
+    margin-bottom: 10px;
+  }
 
-.game-board {
-  &.finished {
-    filter: blur(0.2em);
-    
-    button{
-      cursor: not-allowed;
+  .game-info {
+    margin-left: 20px;
+
+    button {
+      margin: 0.2em;
+      padding: 1em;
+      background-color: $background-gray;
+      border-width: 0.3em;
+      border-color: $border-silver;
+      border-radius: 0.8em;
+      color: $text-white;
+
+      &:hover {
+        cursor: pointer;
+        border-color: $logo-coral;
+      }
+
+      &.square {
+        border-radius: 0.1em;
+      }
+
+      &.restart {
+        background-color: $item-background-gunmetal;
+      }
+    }
+  }
+
+  .game-score {
+    padding: 0.2em;
+    text-align: center;
+    margin-bottom: 2em;
+    border: 0.1em solid $border-silver;
+    border-radius: 0.5em;
+  }
+
+  $board-size: 90vw; // Set the size of the board based on viewport width
+
+  .game-board {
+    width: $board-size;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+
+    &.finished {
+      filter: blur(0.2em);
+
+      .square {
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .board-row {
+    display: flex;
+    width: inherit;
+  }
+
+  .square {
+    width: inherit;
+    font-size: 4vw;
+    aspect-ratio: 1/1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $item-background-gunmetal;
+    border: $border-silver solid;
+    border-radius: 1vw;
+    transition: all 0.3s;
+    cursor: pointer;
+    color: $text-white;
+
+    &:hover {
+      background-color: $logo-coral;
+    }
+
+    &:focus {
+      outline: none;
     }
   }
 }
 
-.game-score {
-  padding: 0.2em;
-  text-align: center;
-  margin-bottom: 2em;
-  border: 0.1em solid $silver;
-  border-radius: 0.5em;
-}
 
-button {
-  margin: 0.2em;
-  padding: 1em;
-  background-color: $paynes-gray;
-  border-width: 0.3em;
-  border-color: $silver;
-  border-radius: 0.8em;
-  color: $white;
-
-  &:hover {
-    cursor: pointer;
-    border-color: $coral;
+@media screen and (max-width: 768px) {
+  .game {
+    flex-direction: column;
   }
 
-  &.square {
-    border-radius: 0.1em;
+  * {
+    text-align: center;
   }
 
-  &.restart{
-    background-color: $gunmetal;
+  .game-info {
+    li {
+      width: 30vw;
+    }
   }
 }
