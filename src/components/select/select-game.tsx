@@ -1,50 +1,92 @@
-import React, { ReactElement } from "react"
-import Select, { StylesConfig } from "react-select"
+import React, { ReactElement } from "react";
+import Select, { StylesConfig } from "react-select";
 
-export default function SelectGame(): ReactElement{
-    const selectCommonStyles = {
-        width: '50vw',
-        margin: 'auto',
-        cursor: 'pointer'
+export class GameMode {
+    value: number;
+    label: string;
+
+    constructor(value: number, label: string) {
+        this.value = value;
+        this.label = label;
     }
+
+    static isGameMode(object: any): boolean {
+        return (
+            object &&
+            typeof object === "object" &&
+            "value" in object &&
+            "label" in object
+        );
+    }
+}
+interface SelectGameProps {
+    currentGameMode: GameMode;
+    onGameModeChange: (gameMode: GameMode) => void;
+}
+
+export default function SelectGame({
+    currentGameMode,
+    onGameModeChange,
+}: SelectGameProps): ReactElement {
+    const selectCommonStyles = {
+        width: "50vw",
+        margin: "auto",
+        cursor: "pointer",
+    };
     const selectStyle: StylesConfig = {
         menu: (styles) => {
             return {
                 ...styles,
-                ...selectCommonStyles
-            }
+                ...selectCommonStyles,
+            };
         },
         container: (styles) => {
             return {
                 ...styles,
-                ...selectCommonStyles
-            }
+                ...selectCommonStyles,
+            };
         },
         control: (styles) => {
             return {
                 ...styles,
                 ...selectCommonStyles,
-            }
+            };
         },
         option: (styles) => {
             return {
                 ...styles,
                 ...selectCommonStyles,
-                backgroundColor: '#bfc0c0ff',
-                ':hover': {
-                    backgroundColor: '#ef8354ff'
-                }
-            }
+                backgroundColor: "#bfc0c0ff",
+                ":hover": {
+                    backgroundColor: "#ef8354ff",
+                },
+            };
         },
-    }
+    };
 
-    const gameModes = [{value: 0, label:'Simple'}, {value: 1, label:'Advanced'}];
+    const gameModes: GameMode[] = [
+        { value: 0, label: "Simple" },
+        { value: 1, label: "Advanced" },
+    ];
 
-    
+    const changeGameMode = (gameMode: any) => {
+        if (GameMode.isGameMode(gameMode)) {
+            const newGameMode: GameMode = {
+                value: gameMode.value,
+                label: gameMode.label,
+            };
+            onGameModeChange(newGameMode);
+        }
+    };
 
     return (
         <>
-            <Select styles={selectStyle} defaultValue={gameModes[0]} options={gameModes} />
+            <Select
+                styles={selectStyle}
+                defaultValue={currentGameMode}
+                options={gameModes}
+                onChange={(newValue) => changeGameMode(newValue)}
+            />
         </>
-    )
+    );
 }

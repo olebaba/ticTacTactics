@@ -6,6 +6,9 @@ $text-white: #ffffffff;
 $logo-coral: #ef8354ff;
 $pink-shadow: #754f62;
 
+$board-size: 90vw; // Set the size of the board based on viewport width
+
+
 * {
   box-sizing: border-box;
   transition: all 0.3s;
@@ -44,7 +47,7 @@ body {
   }
 
   .game-info {
-    margin-left: 20px;
+    margin-left: 2em;
 
     button {
       margin: 0.2em;
@@ -78,7 +81,6 @@ body {
     border-radius: 0.5em;
   }
 
-  $board-size: 90vw; // Set the size of the board based on viewport width
 
   .game-board {
     width: $board-size;
@@ -119,6 +121,29 @@ body {
 
     &:focus {
       outline: none;
+    }
+  }
+}
+
+.multi-game {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: auto;
+  gap: 2em 1em;
+  max-width: $board-size;
+
+  .game {
+    background-color: $background-gray;
+    text-align: center;
+    font-size: 4vw;
+    width: calc($board-size/3 - 1em);
+
+    div {
+      width: inherit;
+    }
+
+    .game-board {
+      width: inherit;
     }
   }
 }
