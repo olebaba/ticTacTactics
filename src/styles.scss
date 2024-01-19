@@ -123,6 +123,25 @@ body {
       outline: none;
     }
   }
+
+  @keyframes grow {
+    0% {
+      transform: scale(0.5);
+      transform-origin: center;
+    }
+    100% {
+      transform: scale(1.1);
+      transform-origin: center;
+    }
+  }
+
+  .winner {
+    font-size: 40em;
+    position: absolute;
+    left: 18%;
+    z-index: 1;
+    animation: grow 1s ease-in-out;
+  }
 }
 
 .multi-game {
@@ -144,6 +163,11 @@ body {
 
     .game-board {
       width: inherit;
+    }
+
+    .winner{
+      font-size: calc($board-size/3 - 6vw);
+      left: auto;
     }
   }
 }

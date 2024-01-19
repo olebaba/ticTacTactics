@@ -64,6 +64,9 @@ export function BaseGame({
 
     return (
         <div className="game">
+            {winner && (
+                <div className="winner">{winner}</div>
+            )}
             <div>
                 {!isMultiGame && <div className="status">{status}</div>}
                 <div className={`game-board ${winner ? "finished" : ""}`}>
