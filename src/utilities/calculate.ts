@@ -1,6 +1,7 @@
 import { XorO } from "../components/board/square";
+import { BoardLayout } from "../objects/history";
 
-export function calculateWinner(squares: XorO[]): XorO | null {
+export function calculateWinner(squares: BoardLayout): XorO | null {
     const winnerLines = [
         [0, 1, 2],
         [3, 4, 5],
@@ -14,11 +15,11 @@ export function calculateWinner(squares: XorO[]): XorO | null {
     for (let i = 0; i < winnerLines.length; i++) {
         const [a, b, c] = winnerLines[i];
         if (
-            squares[a] &&
-            squares[a] === squares[b] &&
-            squares[a] === squares[c]
+            squares.layout[a] &&
+            squares.layout[a] === squares.layout[b] &&
+            squares.layout[a] === squares.layout[c]
         ) {
-            return squares[a];
+            return squares.layout[a];
         }
     }
     return null;

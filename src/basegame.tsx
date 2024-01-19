@@ -2,26 +2,32 @@ import React, { ReactElement, useState } from "react";
 import { calculateWinner } from "./utilities/calculate";
 import { XorO } from "./components/board/square";
 import GameBoard from "./components/board/board";
+import { GameHistory, BoardLayout } from "./objects/history";
 
 interface CurrentGameProps {
     onScoreChange: (winner: XorO) => void;
+    onGlobalMove?: () => void;
     isMultiGame?: boolean;
+    xIsNextGlobal?: boolean;
 }
 
 export function BaseGame({
     onScoreChange,
+    onGlobalMove,
     isMultiGame,
+    xIsNextGlobal
 }: CurrentGameProps): ReactElement {
-    const [history, setHistory] = useState<XorO[][]>([Array(9).fill(null)]);
+    const [localHistory, setLocalHistory] = useState(new GameHistory(3));
     const [currentMove, setCurrentMove] = useState<number>(0);
+    const currentSquares: BoardLayout = localHistory.history.at(currentMove)!; //todo: remove null assert?
     const xIsNext: boolean = currentMove % 2 === 0;
-    const currentSquares: XorO[] = history[currentMove];
     let status: string;
 
-    const handlePlay = (nextSquares: XorO[]) => {
-        const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
-        setHistory(nextHistory);
-        setCurrentMove(nextHistory.length - 1);
+    const handlePlay = (nextSquares: BoardLayout) => {
+        const nextHistory: GameHistory = {...localHistory};
+        nextHistory.history[currentMove + 1] = nextSquares;
+        setLocalHistory(nextHistory);
+        setCurrentMove(nextHistory.history.length - 1);
     };
 
     const handleWin = (winner: XorO) => {
@@ -29,11 +35,11 @@ export function BaseGame({
     };
 
     const jumpTo = (nextMove: number) => {
-        nextMove === 0 ? setHistory([Array(9).fill(null)]) : null;
+        nextMove === 0 ? setLocalHistory(new GameHistory(3)) : null;
         setCurrentMove(nextMove);
     };
 
-    const moves = history.map((_, move: number) => {
+    const moves = localHistory.history.map((_, move: number) => {
         let description: string;
         if (move > 0) {
             description = "Go to move #" + move;
@@ -55,7 +61,7 @@ export function BaseGame({
     let winner: string | null = calculateWinner(currentSquares);
     if (winner) {
         status = "Winner: " + winner;
-    } else if (!currentSquares.some((square) => square === null)) {
+    } else if (!currentSquares.layout.some((square) => square === null)) {
         status = "Game is tied!";
         winner = "tied";
     } else {
@@ -71,7 +77,7 @@ export function BaseGame({
                 {!isMultiGame && <div className="status">{status}</div>}
                 <div className={`game-board ${winner ? "finished" : ""}`}>
                     <GameBoard
-                        xIsNext={xIsNext}
+                        xIsNext={xIsNextGlobal ? xIsNextGlobal : xIsNext}
                         squareValues={currentSquares}
                         onPlay={handlePlay}
                         onWin={handleWin}

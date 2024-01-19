@@ -1,12 +1,13 @@
 import React, { ReactElement, useState } from "react";
 import Square, { XorO } from "./square";
 import { calculateWinner } from "../../utilities/calculate";
+import { BoardLayout } from "../../objects/history";
 
 
 interface BoardProps {
     xIsNext: boolean;
-    squareValues: XorO[];
-    onPlay: (squares: XorO[]) => void;
+    squareValues: BoardLayout;
+    onPlay: (squares: BoardLayout) => void;
     onWin: (winner: XorO) => void;
 }
 
@@ -18,12 +19,12 @@ export default function Board({
 }: BoardProps): ReactElement[] {
     function handleClick(i: number) {
         let winner = calculateWinner(squareValues);
-        if (winner || squareValues[i]) return;
-        const newSquares = squareValues.slice();
+        if (winner || squareValues.layout[i]) return;
+        const newSquares = {...squareValues};
         if (xIsNext) {
-            newSquares[i] = "X";
+            newSquares.layout[i] = "X";
         } else {
-            newSquares[i] = "O";
+            newSquares.layout[i] = "O";
         }
         onPlay(newSquares);
         winner = calculateWinner(newSquares);
@@ -40,7 +41,7 @@ export default function Board({
             row.push(
                 <Square
                     key={index}
-                    value={squareValues[index]}
+                    value={squareValues.layout[index]}
                     onSquareClick={() => handleClick(index)}
                     />
             );
