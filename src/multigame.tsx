@@ -1,7 +1,6 @@
 import React, { ReactElement, useState } from "react";
 import { BaseGame } from "./basegame";
-import Square, { XorO } from "./components/board/square";
-import Board from "./components/board/board";
+import { XorO } from "./components/board/square";
 import { calculateWinner } from "./utilities/calculate";
 
 export interface MultiGameProps {

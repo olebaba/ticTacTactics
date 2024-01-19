@@ -18,7 +18,7 @@ export default function Square({
         )
     }
     return (
-        <button className="square" onClick={onSquareClick}>
+        <button title={`Click to draw X or O`} className="square" onClick={onSquareClick}>
             {value}
         </button>
     );

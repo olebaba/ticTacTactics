@@ -17,7 +17,6 @@ export default function GameOverview(): ReactElement {
     };
 
     const handleGameModeChange = (gameMode: GameMode) => {
-        console.log("changing game mode to", gameMode);
         setGameMode(gameMode);
     };
 
@@ -25,8 +24,8 @@ export default function GameOverview(): ReactElement {
         <>
             <div className="logo">Tic Tac Tactics</div>
             <div className="game-mode">
-                <h2>Choose game mode</h2>
                 <SelectGame
+                    labelId={gameMode.label}
                     currentGameMode={gameMode}
                     onGameModeChange={handleGameModeChange}
                 />

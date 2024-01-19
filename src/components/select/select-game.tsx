@@ -21,6 +21,7 @@ export class GameMode {
 }
 interface SelectGameProps {
     currentGameMode: GameMode;
+    labelId: string;
     onGameModeChange: (gameMode: GameMode) => void;
 }
 
@@ -56,10 +57,10 @@ export default function SelectGame({
             return {
                 ...styles,
                 ...selectCommonStyles,
-                backgroundColor: "#bfc0c0ff",
-                ":hover": {
-                    backgroundColor: "#ef8354ff",
-                },
+                // backgroundColor: "#bfc0c0ff",
+                // ":hover": {
+                //     backgroundColor: "#ef8354ff",
+                // },
             };
         },
     };
@@ -81,11 +82,17 @@ export default function SelectGame({
 
     return (
         <>
+            <label id="gameModeLabel" htmlFor="gameModeSelector">
+                <h2>Choose game mode</h2>
+            </label>
             <Select
                 styles={selectStyle}
                 defaultValue={currentGameMode}
                 options={gameModes}
                 onChange={(newValue) => changeGameMode(newValue)}
+                aria-labelledby="gameModeLabel"
+                isSearchable={false}
+                inputId="gameModeSelector"
             />
         </>
     );

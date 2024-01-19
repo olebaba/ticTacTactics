@@ -87,6 +87,8 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
+    border-radius: 1vw;
+
 
     &.finished {
       filter: blur(0.2em);
@@ -94,6 +96,10 @@ body {
       .square {
         cursor: not-allowed;
       }
+    }
+
+    &:focus-within {
+      outline: $text-white solid 0.2rem;
     }
   }
 
@@ -120,7 +126,8 @@ body {
     }
 
     &:focus {
-      outline: none;
+      outline: $logo-coral solid 0.2rem;
+      z-index: 1;
     }
   }
 
